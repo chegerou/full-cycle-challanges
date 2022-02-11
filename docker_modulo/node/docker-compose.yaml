@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    restart: always
+    tty: true
+    volumes: 
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=nodedb
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - nodenet
+
+  nodejs:
+    build:
+      context: ./service
+    image: node:gallium-alpine3.14
+    container_name: nodejs
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 30s node index.js
+    restart: always
+    tty: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    networks: 
+      - nodenet
+
+  nginx:
+    build:
+       context: ./nginx
+    image: nginx:latest
+    container_name: nginx
+    tty: true
+    ports:
+      - "8080:80"
+    networks:
+      - nodenet
+    depends_on:
+      - nodejs
+
+networks:
+    nodenet:
+      driver: bridge
+

@@ -1,0 +1,10 @@
+FROM nginx:1.15.0-alpine
+
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d
+
+RUN mkdir /usr/src/app -p
+
+WORKDIR /usr/src/app
+
+COPY index.js .
