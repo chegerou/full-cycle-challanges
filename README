@@ -1,3 +1,6 @@
 
 #1 - CRIAR UMA IMAGEM COM GOLANG QUE POSSUA MENOS DE 2MB
     URL_DOCKER_HUB: https://hub.docker.com/r/chegerou/golang
+
+#2 - CRIAR UMA APLICAÇÃO UTILIZANDO O NGINX COMO PROXY REVERSO DO NODE JS E ARMAZENDO INFORMAÇÕES NO DB.
+    Você encontrá essa atividade feita na pasta ./node.
