@@ -13,6 +13,12 @@ const connection = mysql.createConnection(config);
 
 app.get('/', (req, res)=>{
     
+    connection.query(
+        `
+            CREATE TABLE IF NOT EXISTS people(id int not null auto_increment, name varchar(255), primary key(id);
+        `
+    );
+
     connection.query('INSERT INTO people(name) Values("Aluno '+Math.floor(Math.random()*100)+'")');
 
     connection.query('SELECT id, name FROM people', function(error, results, fields){
