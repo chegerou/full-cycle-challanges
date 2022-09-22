@@ -1,49 +1,62 @@
 import Address from "./address";
 
 export default class Customer {
-    private __id: string;
-    private __name: string;
-    private __address!: Address;
-    private __active: boolean = false;
+    private _id: string;
+    private _name: string;
+    private _address!: Address;
+    private _active: boolean = false;
 
-    constructor(id: string, name: string, address: Address){
-        this.__id = id;
-        this.__name = name;
-        this.__address = address;
+    constructor(id: string, name: string){
+        this._id = id;
+        this._name = name;
 
         this.validate();
     }
 
-    changeName(name: string){
-        this.__name = name;
+    get name(): string {
+        return this._name;
+    }
 
+    get Address(): Address{
+        return this._address;
+    }
+    
+    set Address(address: Address) {
+        this._address = address;
+    }
+
+    changeName(name: string){
+        this._name = name;
         this.validate();
     }
 
     changeAddress(address: Address){
-        this.__address = address;
+        this._address = address;
     }
 
     activate() {
-        if(this.__address === undefined){
+        if(this._address === undefined){
             throw new Error("Address is mandatory to activate a customer.");
         }
 
-        this.__active = true;
+        this._active = true;
     }
 
     deactivate() {
-        this.__active = false;
+        this._active = false;
     }
 
     validate(){
-        if(this.__name.length === 0){
-            throw new Error("Name is required.");
+        if(this._id.length === 0){
+            throw new Error("Id is required.");
         }
 
-        if(this.__id.length === 0){
-            throw new Error("Id is required.");
+        if(this._name.length === 0){
+            throw new Error("Name is required.");
         }
     }
 
+    isActive(): boolean {
+        return this._active;
+    }
 }
