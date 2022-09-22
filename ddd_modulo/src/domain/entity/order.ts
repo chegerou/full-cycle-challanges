@@ -21,17 +21,19 @@ export default class Order{
         if(this._id.length === 0){
             throw new Error("Id is required.");
         }
-
         if(this._custumerId.length === 0){
             throw new Error("custumerId is required.");
         }
-
         if(this._items.length === 0){
             throw new Error("Items is required.");
         }
+        if(this._items.some(item =>  item.quantity <= 0)){
+            throw new Error("Quantity must be greater than zero.");
+        }
+
     }
 
     total():number {
-        return this._items.reduce((acc, item) => acc + item.getPrice(), 0)
+        return this._items.reduce((acc, item) => acc + item.price, 0)
     }
 }

@@ -48,7 +48,4 @@ describe("Custumer unit tests", () => {
             customer.activate();
         }).toThrowError("Address is mandatory to activate a customer.");
     });
-
-
-
 });
