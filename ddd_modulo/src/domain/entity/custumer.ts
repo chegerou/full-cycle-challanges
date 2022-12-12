@@ -7,14 +7,14 @@ export default class Customer {
     private _active: boolean = false;
     private _rewardPoints: number = 0;
 
-    constructor(id: string, name: string){
+    constructor(id: string, name: string) {
         this._id = id;
         this._name = name;
 
         this.validate();
     }
 
-    get id(): string{
+    get id(): string {
         return this._id;
     }
 
@@ -22,10 +22,10 @@ export default class Customer {
         return this._name;
     }
 
-    get Address(): Address{
+    get Address(): Address {
         return this._address;
     }
-    
+
     set Address(address: Address) {
         this._address = address;
     }
@@ -34,13 +34,12 @@ export default class Customer {
         return this._rewardPoints;
     }
 
-
-    changeName(name: string){
+    changeName(name: string) {
         this._name = name;
         this.validate();
     }
 
-    changeAddress(address: Address){
+    changeAddress(address: Address) {
         this._address = address;
     }
 
@@ -49,7 +48,7 @@ export default class Customer {
     }
 
     activate() {
-        if(this._address === undefined){
+        if (this._address === undefined) {
             throw new Error("Address is mandatory to activate a customer.");
         }
 
@@ -60,12 +59,12 @@ export default class Customer {
         this._active = false;
     }
 
-    validate(){
-        if(this._id.length === 0){
+    validate() {
+        if (this._id.length === 0) {
             throw new Error("Id is required.");
         }
 
-        if(this._name.length === 0){
+        if (this._name.length === 0) {
             throw new Error("Name is required.");
         }
     }
