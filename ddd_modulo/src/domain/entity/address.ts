@@ -15,19 +15,19 @@ export default class Address {
         this.validate();
     }
 
-    get street() {
+    get street(): string {
         return this.__street;
     }
 
-    get number() {
+    get number(): number {
         return this.__number;
     }
 
-    get zip() {
+    get zip(): string {
         return this.__zip;
     }
 
-    get city() {
+    get city(): string {
         return this.__city;
     }
 
