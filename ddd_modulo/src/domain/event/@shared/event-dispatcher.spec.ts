@@ -59,7 +59,5 @@ describe("Domain events tests", () => {
         //Quando o notify for executado o SendEmailWhenProductIsCreatedHandler deve ser chamado
         eventDispatcher.notify(productCreatedEvent);
         expect(spyEventHandler).toHaveBeenCalled();
-    });
-
-
+    });    
 });
