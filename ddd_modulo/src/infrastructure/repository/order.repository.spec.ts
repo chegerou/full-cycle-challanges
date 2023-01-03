@@ -1,9 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import Address from "../../domain/entity/address";
-import Customer from "../../domain/entity/custumer";
-import Order from "../../domain/entity/order";
-import OrderItem from "../../domain/entity/order_item";
-import Product from "../../domain/entity/product";
+import OrderItem from "../../domain/checkout/entity/order_item";
 import CustomerModel from "../db/sequelize/model/customer.model";
 import OrderItemModel from "../db/sequelize/model/order-item.model";
 import OrderModel from "../db/sequelize/model/order.model";
@@ -11,6 +8,10 @@ import ProductModel from "../db/sequelize/model/product.model";
 import CustomerRepository from "./customer.repository";
 import OrderRepository from "./order.repository";
 import ProductRepository from "./product.repository";
+import Customer from "../../domain/customer/entity/custumer";
+import Product from "../../domain/product/entity/product";
+import Order from "../../domain/checkout/entity/order";
+
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
@@ -145,7 +146,7 @@ describe("Order repository test", () => {
     const ordemItem = new OrderItem("Item123", product.name, product.price, product.id, 2);
     const order = new Order("OrderId123", "123", [ordemItem]);
     await orderRepository.create(order);
-    
+
     const orderModel = await OrderModel.findOne({ where: { id: "OrderId123" }, include: ["items"] });
 
     let orderResult = await orderRepository.find("OrderId123");

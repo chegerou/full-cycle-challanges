@@ -1,6 +1,7 @@
+import EventDispatcher from "../../@shared/event/event-dispatcher";
 import Address from "../../entity/address";
-import Customer from "../../entity/custumer";
-import EventDispatcher from "../@shared/event-dispatcher";
+import Customer from "../entity/custumer";
+
 import CustomerChangedAddressEvent from "./customer-changed-address.event";
 import CustomerCreatedEvent from "./customer-created.event";
 import CustomerChangedAddressHandler from "./handler/customer-changed-address.handler";
