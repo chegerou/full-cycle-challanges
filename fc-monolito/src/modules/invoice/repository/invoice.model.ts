@@ -12,7 +12,7 @@ interface ItemsData {
   price: number;
   createdAt: Date;
   updatedAt: Date;
-};
+}
 
 @Table({
   tableName: "invoice",
@@ -52,13 +52,13 @@ export default class InvoiceModel extends Model {
     allowNull: false,
     type: DataType.JSON,
     get() {
-      const rawItems = this.getDataValue('items');
+      const rawItems = this.getDataValue("items");
       return rawItems.map((item: any) => ({
-        id: item._id._id,
-        name: item._name,
-        price: item._price,
-        createdAt: item._createdAt,  // assuming the response uses underscores
-        updatedAt: item._updatedAt,  // assuming the response uses underscores
+        id: item?._id?._id ? item._id._id : item.id,
+        name: item?._name ? item._name : item.name,
+        price: item?._price ? item._price : item.price,
+        createdAt: item._createdAt, // assuming the response uses underscores
+        updatedAt: item._updatedAt, // assuming the response uses underscores
       }));
     },
   })
