@@ -1,13 +1,14 @@
 import Express from "express";
 import Cors from "cors";
+import Routes from "./routes";
 
 export default class App {
   public server: Express.Application;
-  private routes: Routes;
+  private router: Routes;
 
   constructor() {
     this.server = Express();
-    this.routes = new Routes();
+    this.router = new Routes();
 
     this.middleware();
   }
@@ -18,7 +19,7 @@ export default class App {
   }
 
   private routes() {
-    this.server.use(this.routes.init());
+    this.server.use(this.router.init());
   }
 
   public async run(): Promise<void> {
