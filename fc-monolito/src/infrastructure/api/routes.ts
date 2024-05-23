@@ -8,7 +8,9 @@ export default class Routes {
   }
 
   public init(): Router {
-    this.router.use();
+    this.router.use("/", (req, res) => {
+      res.send("Hello World");
+    });
     return this.router;
   }
 }
