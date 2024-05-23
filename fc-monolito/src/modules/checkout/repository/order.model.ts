@@ -1,4 +1,4 @@
-import { Column, PrimaryKey, Table, Model } from "sequelize-typescript";
+import { Column, PrimaryKey, Table, Model, DataType } from "sequelize-typescript";
 
 interface ClientData {
   id: string;
@@ -23,10 +23,10 @@ export default class OrderModel extends Model {
   @Column({ allowNull: false })
   id: string;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, type: DataType.JSON, })
   client: ClientData;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, type: DataType.JSON, })
   products: Product[];
 
   @Column({ allowNull: false })
