@@ -1,4 +1,7 @@
+import Id from "../../@shared/domain/value-object/id.value-object";
+import Client from "../domain/client.entity";
 import Order from "../domain/order.entity";
+import Product from "../domain/product.entity";
 import CheckoutGateway from "../gateway/checkout.gateway";
 import OrderModel from "./order.model";
 
@@ -22,7 +25,27 @@ export default class OrderRepository implements CheckoutGateway {
       total: input.total,
     });
   }
-  findOrder(id: string): Promise<Order> {
-    throw new Error("Method not implemented.");
+  async findOrder(id: string): Promise<Order> {
+    const orderModel = await OrderModel.findByPk(id);
+
+    return new Order({
+      id: new Id(orderModel.id),
+      client: new Client({
+        id: new Id(orderModel.client.id),
+        name: orderModel.client.name,
+        email: orderModel.client.email,
+        address: orderModel.client.address,
+      }),
+      products: orderModel.products.map(
+        (p) =>
+          new Product({
+            id: new Id(p.id),
+            name: p.name,
+            description: p.description,
+            salesPrice: p.salesPrice,
+          })
+      ),
+      status: orderModel.status,
+    });
   }
 }
