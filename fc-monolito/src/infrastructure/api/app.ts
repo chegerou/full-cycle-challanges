@@ -1,21 +1,24 @@
 import Express from "express";
 import Cors from "cors";
 import Routes from "./routes";
+import Database from "./config/database";
 
 export default class App {
   public server: Express.Application;
   private router: Routes;
+  private database: Database;
 
-  constructor() {
+  constructor(router: Routes, database: Database) {
     this.server = Express();
-    this.router = new Routes();
+    this.router = router;
+    this.database = database;
 
     this.middleware();
   }
 
   private middleware(): void {
     this.server.use(Express.json());
-    this.server.use(Cors())
+    this.server.use(Cors());
   }
 
   private routes() {
@@ -23,8 +26,9 @@ export default class App {
   }
 
   public async run(): Promise<void> {
+    await this.database.connect();
+    await this.database.migrateUp();
     this.routes();
     this.server.listen(3000, () => console.log("Api running on port 3000"));
   }
-
 }
