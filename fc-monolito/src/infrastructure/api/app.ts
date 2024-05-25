@@ -27,7 +27,6 @@ export default class App {
 
   public async run(): Promise<void> {
     await this.database.connect();
-    await this.database.migrateUp();
     this.routes();
     this.server.listen(3000, () => console.log("Api running on port 3000"));
   }
