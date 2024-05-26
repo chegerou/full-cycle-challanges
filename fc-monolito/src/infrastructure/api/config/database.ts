@@ -43,7 +43,7 @@ export default class Database {
       console.log("Pending migrations:", pendingMigrations);
 
       await this.migration.up();
-      console.log("Migrations have been executed successfully.");
+      
     } catch (error) {
       console.error(
         "Unable to connect to the database or execute migrations:",
