@@ -28,18 +28,18 @@ export default class Database {
       StoreCatalogModel,
     ]);
 
-    this.migration = migrator(this.connection);
-
     try {
-      console.log("Sync Database models...");
-      await this.connection.sync();
+      this.migration = migrator(this.connection);
 
       const pendingMigrations = await this.migration.pending();
-      // console.log("Pending migrations:", pendingMigrations);
+      console.log("Pending migrations:", pendingMigrations);
 
       await this.migration.down();
       await this.migration.up();
       console.log("Migrations have been executed successfully.");
+
+      console.log("Sync Database models...");
+      await this.connection.sync();
     } catch (error) {
       console.error(
         "Unable to connect to the database or execute migrations:",
