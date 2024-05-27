@@ -17,7 +17,6 @@
   },
   "scripts": {
     "start": "npm run tsc && node dist/infrastructure/api/server.js",
-    "dev": "nodemon --watch 'src/' --exec \"ts-node src/infrastructure/api/server.ts\" -e ts",
     "test": "npm run tsc -- --noEmit && jest",
     "tsc": "tsc"
   },
