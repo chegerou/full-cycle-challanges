@@ -11,17 +11,12 @@ export default class Database {
   public connection: Sequelize;
   private migration: Umzug<any>;
 
-  constructor() {
-    this.connect();
-  }
-
-  async connect(): Promise<void> {
+  public async connect(): Promise<void> {
     console.log("Connecting to database...");
     this.connection = new Sequelize({
       dialect: "sqlite",
       storage: ":memory:",
       logging: false,
-      sync: { force: true },
     });
 
     console.log("Database creating models...");
@@ -37,11 +32,12 @@ export default class Database {
 
     try {
       console.log("Sync Database models...");
-      await this.connection.authenticate();
+      await this.connection.sync();
 
       const pendingMigrations = await this.migration.pending();
-      console.log("Pending migrations:", pendingMigrations);
+      // console.log("Pending migrations:", pendingMigrations);
 
+      await this.migration.down();
       await this.migration.up();
       console.log("Migrations have been executed successfully.");
     } catch (error) {

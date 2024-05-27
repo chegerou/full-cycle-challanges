@@ -26,6 +26,7 @@ export default class App {
   }
 
   public async run(): Promise<void> {
+    console.log("App run method called"); 
     await this.database.connect();
     this.routes();
     this.server.listen(3000, () => console.log("Api running on port 3000"));
