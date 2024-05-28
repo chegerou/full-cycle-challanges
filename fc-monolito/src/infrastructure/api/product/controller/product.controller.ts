@@ -33,6 +33,6 @@ export default class ProductController implements ProductControllerInterface {
 
     await productAdmFacade.addProduct(addProductFacadeInput);
 
-    return res.status(201).send("Created.");
+    return res.status(201).send("Product Created...");
   }
 }

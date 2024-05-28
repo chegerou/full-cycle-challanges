@@ -11,7 +11,7 @@ export default class ProductRouter implements IRoutes {
   init(): Router {
     const router = Router();
     router.use("/api/products", router);
-    router.post("/", this.controller.create);
+    router.post("/register", this.controller.create);
     return router;
   }
 }
