@@ -6,6 +6,8 @@ import { migrator } from "../../../migration/config/migrator";
 import ProductRouter from "../routes/product.router";
 import { ProductModel as ProductAdmModel } from "../../../../modules/product-adm/repository/product.model";
 import { ProductModel as StoreCatalogModel } from "../../../../modules/store-catalog/repository/product.model";
+import ProductAdmFacadeInterface from "../../../../modules/product-adm/facade/product-adm.facade.interface";
+import ProductAdmFacadeFactory from "../../../../modules/product-adm/factory/facade.factory";
 
 describe("ProductController", () => {
   const app: Express = express();
@@ -42,9 +44,31 @@ describe("ProductController", () => {
       stock: 10,
     };
 
-    const response = await request(app).post("/api/products/register").send(data);
+    const response = await request(app)
+      .post("/api/products/register")
+      .send(data);
 
     expect(response.status).toBe(201);
-    expect(response.text).toBe("Product Created...");
+    expect(response.body.status).toBe("Product Created...");
+  });
+
+  it("should be check stock", async () => {
+    const productAdmFacade: ProductAdmFacadeInterface = ProductAdmFacadeFactory.create();
+    const data = {
+      id: "3473",
+      name: "Bananinha",
+      description: "Preto e com manchas amarelas",
+      purchasePrice: 5.5,
+      stock: 10,
+    };
+    await productAdmFacade.addProduct(data);
+
+    const response = await request(app)
+      .post("/api/products/check-stock")
+      .send({ productId: "3473" });
+
+    expect(response.status).toBe(200);
+    expect(response.body.stock).toBe(10);
+    expect(response.body.productId).toBe("3473");
   });
 });

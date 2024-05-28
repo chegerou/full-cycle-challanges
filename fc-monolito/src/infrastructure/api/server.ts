@@ -1,4 +1,4 @@
-require('ts-node/register');
+require("ts-node/register");
 import Database from "./config/database";
 import App from "./app";
 import Routes from "./routes";

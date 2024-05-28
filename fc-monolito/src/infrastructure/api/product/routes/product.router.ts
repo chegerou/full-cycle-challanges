@@ -1,17 +1,18 @@
 import { Router } from "express";
-import IRoutes from "../../@shared/routes.interface";
 import ProductController from "../controller/product.controller";
 
-export default class ProductRouter implements IRoutes {
-  private controller: ProductController;
+export default class ProductRouter {
+  public router: Router;
+  private productController: ProductController;
+
   constructor() {
-    this.controller = new ProductController();
+    this.router = Router();
+    this.productController = new ProductController();
   }
 
   init(): Router {
-    const router = Router();
-    router.use("/api/products", router);
-    router.post("/register", this.controller.create);
-    return router;
+    this.router.post("/api/products/check-stock", (req, res) => this.productController.checkStock(req, res));
+    this.router.post("/api/products/register", (req, res) => this.productController.create(req, res));
+    return this.router;
   }
 }
