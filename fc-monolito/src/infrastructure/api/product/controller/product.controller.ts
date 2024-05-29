@@ -22,7 +22,7 @@ export default class ProductController implements ProductControllerInterface {
 
   async checkStock(req: Request, res: Response): Promise<Response> {
     if (!req.body) {
-      res.status(400).send("Request body is empty.");
+      res.status(400).json({ error: "Request body is empty..." });
     }
 
     const { productId } = req.body;
