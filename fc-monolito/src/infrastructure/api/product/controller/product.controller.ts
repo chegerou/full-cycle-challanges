@@ -15,7 +15,8 @@ export interface AddProductFacadeInputDto {
 }
 
 export default class ProductController implements ProductControllerInterface {
-  private readonly productAdmFacade: ProductAdmFacadeInterface = ProductAdmFacadeFactory.create();
+  private readonly productAdmFacade: ProductAdmFacadeInterface =
+    ProductAdmFacadeFactory.create();
 
   constructor() {}
 
@@ -38,7 +39,7 @@ export default class ProductController implements ProductControllerInterface {
 
   async create(req: Request, res: Response): Promise<Response> {
     if (!req.body) {
-      res.status(400).send("Request body is empty.");
+      res.status(400).json({ error: "Request body is empty..." });
     }
 
     const { id, name, description, purchasePrice, stock } = req.body;
