@@ -6,8 +6,8 @@
 export default {
   transform: {
     "^.+\.(t|j)sx?$": ["@swc/jest"],
-    
   },
+  testTimeout: 180000,
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 
