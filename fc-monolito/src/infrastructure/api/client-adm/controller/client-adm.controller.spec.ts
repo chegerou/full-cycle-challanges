@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import { Sequelize } from "sequelize-typescript";
 import request from "supertest";
-import { ClientModel } from "../../../../modules/client-adm/repository/client.model";
+import ClientModel from "../../../../modules/client-adm/repository/client.model";
 import { AddClientFacadeInputDto } from "../../../../modules/client-adm/facade/client-adm.facade.interface";
 import ClientAdmRouter from "../router/client-adm.router";
 
