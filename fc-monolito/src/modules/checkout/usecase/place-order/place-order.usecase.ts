@@ -41,7 +41,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
       throw new Error("Client not found");
     }
 
-    await this.validateProducts(input);
+    //await this.validateProducts(input);
     const products = await Promise.all(
       input.products.map((p) => this.getProduct(p.productId))
     );
