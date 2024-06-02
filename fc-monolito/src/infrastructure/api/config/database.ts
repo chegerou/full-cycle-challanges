@@ -2,8 +2,8 @@ import { Sequelize } from "sequelize-typescript";
 import ClientModel from "../../../modules/client-adm/repository/client.model";
 import InvoiceModel from "../../../modules/invoice/repository/invoice.model";
 import TransactionModel from "../../../modules/payment/repository/transaction.model";
-import { ProductModel as ProductAdmModel } from "../../../modules/product-adm/repository/product.model";
-import { ProductModel as StoreCatalogModel } from "../../../modules/store-catalog/repository/product.model";
+import ProductModel from "../../../modules/product-adm/repository/product.model";
+import StoreCatalogModel from "../../../modules/store-catalog/repository/product.model";
 import { Umzug } from "umzug";
 import { migrator } from "../../migration/config/migrator";
 
@@ -24,7 +24,7 @@ export default class Database {
       ClientModel,
       InvoiceModel,
       TransactionModel,
-      ProductAdmModel,
+      ProductModel,
       StoreCatalogModel,
     ]);
 

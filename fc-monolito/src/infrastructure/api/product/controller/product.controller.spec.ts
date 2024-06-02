@@ -4,8 +4,8 @@ import request from "supertest";
 import { Umzug } from "umzug";
 import { migrator } from "../../../migration/config/migrator";
 import ProductRouter from "../routes/product.router";
-import { ProductModel as ProductAdmModel } from "../../../../modules/product-adm/repository/product.model";
-import { ProductModel as StoreCatalogModel } from "../../../../modules/store-catalog/repository/product.model";
+import ProductModel from "../../../../modules/product-adm/repository/product.model";
+import StoreCatalogModel from "../../../../modules/store-catalog/repository/product.model";
 import ProductAdmFacadeInterface from "../../../../modules/product-adm/facade/product-adm.facade.interface";
 import ProductAdmFacadeFactory from "../../../../modules/product-adm/factory/facade.factory";
 
@@ -24,7 +24,7 @@ describe("ProductController", () => {
       logging: false,
     });
 
-    sequelize.addModels([ProductAdmModel, StoreCatalogModel]);
+    sequelize.addModels([ProductModel, StoreCatalogModel]);
     migration = migrator(sequelize);
     await migration.up();
   });
