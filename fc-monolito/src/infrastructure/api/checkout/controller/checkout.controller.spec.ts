@@ -73,23 +73,19 @@ describe("CheckoutController", () => {
       updatedAt: new Date(),
     });
 
-    try {
-      await StoreCatalogModel.create({
-        id: "1p",
-        name: "Product 1",
-        description: "Description 1",
-        salesPrice: 100,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    await StoreCatalogModel.update(
+      { salesPrice: 100 },
+      {
+        where: { id: "1p" },
+      }
+    );
 
-    await StoreCatalogModel.create({
-      id: "2p",
-      name: "Product 2",
-      description: "Description 2",
-      salesPrice: 200,
-    });
+    await StoreCatalogModel.update(
+      { salesPrice: 200 },
+      {
+        where: { id: "2p" },
+      }
+    );
   });
 
   afterEach(async () => {

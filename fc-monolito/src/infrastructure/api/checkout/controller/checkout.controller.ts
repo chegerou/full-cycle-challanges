@@ -12,12 +12,12 @@ export default class CheckoutController implements CheckoutControllerInterface {
     this.placeOrderUseCase = CheckoutFactory.create();
   }
 
-  async create(req: Request, res: Response): Promise<PlaceOrderOutputDto> {
+  async create(req: Request, res: Response): Promise<void> {
     const { clientId, products } = req.body;
     const output = await this.placeOrderUseCase.execute({
       clientId,
       products,
     });
-    return output;
+    res.status(201).json(output);
   }
 }
