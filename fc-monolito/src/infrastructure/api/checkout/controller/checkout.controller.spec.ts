@@ -6,8 +6,8 @@ import ClientModel from "../../../../modules/client-adm/repository/client.model"
 import OrderModel from "../../../../modules/checkout/repository/order.model";
 import TransactionModel from "../../../../modules/payment/repository/transaction.model";
 import InvoiceModel from "../../../../modules/invoice/repository/invoice.model";
-import { ProductModel as ProductAdmModel } from "../../../../modules/product-adm/repository/product.model";
-import { ProductModel as StoreCatalogModel } from "../../../../modules/store-catalog/repository/product.model";
+import ProductModel from "../../../../modules/product-adm/repository/product.model";
+import StoreCatalogModel from "../../../../modules/store-catalog/repository/product.model";
 import { Umzug } from "umzug";
 import { migrator } from "../../../migration/config/migrator";
 
@@ -29,12 +29,14 @@ describe("CheckoutController", () => {
       ClientModel,
       InvoiceModel,
       TransactionModel,
-      ProductAdmModel,
+      ProductModel,
       StoreCatalogModel,
       OrderModel,
     ]);
     migration = migrator(sequelize);
     await migration.up();
+
+    await sequelize.sync();
 
     await ClientModel.create({
       id: "1c",
@@ -51,7 +53,7 @@ describe("CheckoutController", () => {
       updatedAt: new Date(),
     });
 
-    await ProductAdmModel.create({
+    await ProductModel.create({
       id: "1p",
       name: "Product 1",
       description: "Description 1",
@@ -61,7 +63,7 @@ describe("CheckoutController", () => {
       updatedAt: new Date(),
     });
 
-    await ProductAdmModel.create({
+    await ProductModel.create({
       id: "2p",
       name: "Product 2",
       description: "Description 2",
@@ -88,8 +90,6 @@ describe("CheckoutController", () => {
       description: "Description 2",
       salesPrice: 200,
     });
-
-    await sequelize.sync();
   });
 
   afterEach(async () => {
