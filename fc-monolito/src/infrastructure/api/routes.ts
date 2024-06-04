@@ -12,6 +12,7 @@ export default class Routes {
   }
 
   public init(): Router {
+    console.log("Starting routes to server...");
     this.router.use(new ProductRouter().init());
     this.router.use(new ClientAdmRouter().init());
     this.router.use(new CheckoutRouter().init());
