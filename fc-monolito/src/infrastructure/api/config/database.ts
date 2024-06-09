@@ -12,14 +12,14 @@ export default class Database {
   private migration: Umzug<any>;
 
   public async connect(): Promise<void> {
-    console.log("Connecting to database...");
+    console.log("Conectando ao banco de dados...");
     this.connection = new Sequelize({
       dialect: "sqlite",
       storage: ":memory:",
       logging: false,
     });
 
-    console.log("Database creating models...");
+    console.log("Criando as tabelas...");
     this.connection.addModels([
       ClientModel,
       InvoiceModel,
@@ -33,13 +33,13 @@ export default class Database {
 
       await this.migration.down();
       await this.migration.up();
-      console.log("Migrations have been executed successfully.");
+      console.log("As Migrations foram executadas com sucesso....");
 
       await this.connection.sync();
-      console.log("Sync Database models...");
+      console.log("Sincronizando o banco de dados...");
     } catch (error) {
       console.error(
-        "Unable to connect to the database or execute migrations:",
+        "Não foi possível conectar ao banco de dados ou executar a migrations:",
         error
       );
     }
