@@ -26,10 +26,10 @@ export default class App {
   }
 
   public async run(): Promise<void> {
-    console.log("App run method called..."); 
+    console.log("Iniciando API..."); 
     await this.database.connect();
-    console.log("Successfully connected to database...");
+    console.log("Sucesso ao conectar com o banco...");
     this.routes();
-    this.server.listen(3000, () => console.log("Api running on port 3000"));
+    this.server.listen(3000, () => console.log("API está rodando na porta 3000..."));
   }
 }
