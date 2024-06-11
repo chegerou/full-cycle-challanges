@@ -12,7 +12,7 @@ export default class Routes {
   }
 
   public init(): Router {
-    console.log("======Iniciando as rotas do servidor======");
+    console.log("======Iniciando as rotas do servidor");
     this.router.use(new ProductRouter().init());
     this.router.use(new ClientAdmRouter().init());
     this.router.use(new CheckoutRouter().init());
