@@ -28,7 +28,7 @@ export default class App {
   public async run(): Promise<void> {
     console.log("Iniciando API..."); 
     await this.database.connect();
-    console.log("Sucesso ao conectar com o banco...");
+    console.log("Sucesso ao conectar com o banco..");
     this.routes();
     this.server.listen(3000, () => console.log("API está rodando na porta 3000..."));
   }
